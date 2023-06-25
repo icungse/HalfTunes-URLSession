@@ -94,22 +94,26 @@ class TrackCell: UITableViewCell {
     artistLabel.text = track.artist
     
     // Show/hide download controls Pause/Resume, Cancel buttons, progress info.
-    var showDownloadControl = false
+    var showDownloadControls = false
     
     
     // Non-nil Download object means a download is in progress.
     if let download = download {
-      showDownloadControl = true
+      showDownloadControls = true
       let title = download.isDownloading ? "Pause" : "Resume"
       pauseButton.setTitle(title, for: .normal)
+      progressLabel.text = download.isDownloading ? "Downloading..." : "Pause"
     }
     
-    pauseButton.isHidden = !showDownloadControl
-    cancelButton.isHidden = !showDownloadControl
+    progressView.isHidden = !showDownloadControls
+    progressLabel.isHidden = !showDownloadControls
+    
+    pauseButton.isHidden = !showDownloadControls
+    cancelButton.isHidden = !showDownloadControls
     
     // If the track is already downloaded, enable cell selection and hide the Download button.
     selectionStyle = downloaded ? UITableViewCell.SelectionStyle.gray : UITableViewCell.SelectionStyle.none
-    downloadButton.isHidden = downloaded || showDownloadControl
+    downloadButton.isHidden = downloaded || showDownloadControls
   }
   
   func updateDisplay(progress: Float, totalSize: String) {
