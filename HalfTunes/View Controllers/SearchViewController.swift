@@ -54,7 +54,7 @@ class SearchViewController: UIViewController {
   // MARK: - Variables And Properties
   //
   lazy var downloadsSession: URLSession = {
-    let configuration = URLSessionConfiguration.default
+    let configuration = URLSessionConfiguration.background(withIdentifier: "com.raywenderlich.HalfTunes.bgSession")
     
     return URLSession(
       configuration: configuration,
