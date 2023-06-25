@@ -53,7 +53,15 @@ class SearchViewController: UIViewController {
   //
   // MARK: - Variables And Properties
   //
-  // TODO 6
+  lazy var downloadsSession: URLSession = {
+    let configuration = URLSessionConfiguration.default
+    
+    return URLSession(
+      configuration: configuration,
+      delegate: self,
+      delegateQueue: nil
+    )
+  }()
   
   var searchResults: [Track] = []
   
@@ -98,7 +106,7 @@ class SearchViewController: UIViewController {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
     
-    // TODO 7
+    downloadService.downloadsSession = downloadsSession
   }
   
 }

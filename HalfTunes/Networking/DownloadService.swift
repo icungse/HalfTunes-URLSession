@@ -61,5 +61,10 @@ class DownloadService {
   
   // TODO 8
   func startDownload(_ track: Track) {
+    let download = Download(track: track)
+    download.task = downloadsSession.downloadTask(with: track.previewURL)
+    download.task?.resume()
+    download.isDownloading = true
+    activeDonwloads[download.track.previewURL] = download
   }
 }
