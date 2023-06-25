@@ -272,4 +272,14 @@ extension SearchViewController: URLSessionDownloadDelegate {
       }
     }
   }
+  
+  func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+    DispatchQueue.main.async {
+      if let appDelelegate = UIApplication.shared.delegate as? AppDelegate, let completionHandler = appDelelegate.backgroundSessionCompletionHandler {
+        appDelelegate.backgroundSessionCompletionHandler = nil
+        
+        completionHandler()
+      }
+    }
+  }
 }
