@@ -112,6 +112,9 @@ class TrackCell: UITableViewCell {
     downloadButton.isHidden = downloaded || showDownloadControl
   }
   
-  // TODO 16
+  func updateDisplay(progress: Float, totalSize: String) {
+    progressView.progress = progress
+    progressLabel.text = String(format: "%.1f%% of %@", progress * 100, totalSize)
+  }
   
 }
